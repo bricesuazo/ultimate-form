@@ -164,7 +164,7 @@ export default function App() {
 
         <div>
           <label htmlFor="age">Age: {form.age}</label>
-          <div className="grid grid-cols-12 gap-2">
+          <div className="grid grid-cols-6 gap-2 3xs:grid-cols-8 2xs:grid-cols-9 xs:grid-cols-10 sm:grid-cols-12">
             {Array.from(Array(100)).map((_, i) => (
               <div key={i} className="flex items-center gap-x-1">
                 <input
