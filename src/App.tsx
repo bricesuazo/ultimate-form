@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { nationalityList } from "./contants";
 
 export default function App() {
   const getRandomMobileNo = () => {
@@ -16,6 +17,7 @@ export default function App() {
     generatedMobile: string | null;
     birthMonth: string;
     age: number;
+    nationality: number;
   }>({
     gender: 10,
     email: "",
@@ -23,6 +25,7 @@ export default function App() {
     generatedMobile: getRandomMobileNo(),
     birthMonth: "April",
     age: 69,
+    nationality: 0,
   });
 
   return (
@@ -119,6 +122,37 @@ export default function App() {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="">
+          <label htmlFor="nationality">
+            Nationality:{" "}
+            {
+              [
+                "",
+                ...nationalityList
+                  .map((value) => ({ value, sort: Math.random() }))
+                  .sort((a, b) => a.sort - b.sort)
+                  .map(
+                    ({ value }) =>
+                      value.charAt(0).toUpperCase() + value.slice(1)
+                  ),
+              ][form.nationality]
+            }
+          </label>
+          <input
+            type="range"
+            name="nationality"
+            id="nationality"
+            value={form.nationality}
+            onChange={(e) =>
+              setForm((form) => ({
+                ...form,
+                nationality: Number(e.target.value),
+              }))
+            }
+            max={nationalityList.length}
+          />
         </div>
 
         <div>
