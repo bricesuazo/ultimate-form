@@ -15,12 +15,14 @@ export default function App() {
     mobile: string | null;
     generatedMobile: string | null;
     birthMonth: string;
+    age: number;
   }>({
     gender: 10,
     email: "",
     mobile: null,
     generatedMobile: getRandomMobileNo(),
     birthMonth: "April",
+    age: 69,
   });
 
   return (
@@ -65,47 +67,6 @@ export default function App() {
             <span className="text-sm text-gray-500">Male</span>
             <span className="text-sm text-gray-500">Female</span>
           </div>
-        </div>
-
-        <div className="">
-          <label htmlFor="birth-month">Birth month: {form.birthMonth}</label>
-
-          <select
-            name="Birth Month"
-            id="birth-month"
-            value={form.birthMonth}
-            onChange={(e) =>
-              setForm((form) => ({
-                ...form,
-                birthMonth: e.target.value,
-              }))
-            }
-            required
-          >
-            <option disabled value="">
-              Month
-            </option>
-            {[
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December",
-            ]
-              .sort()
-              .map((x) => (
-                <option key={x} value={x}>
-                  {x}
-                </option>
-              ))}
-          </select>
         </div>
 
         <div className="flex flex-col">
@@ -158,6 +119,71 @@ export default function App() {
               </div>
             </div>
           )}
+        </div>
+
+        <div>
+          <label htmlFor="birth-month">Birth month: {form.birthMonth}</label>
+
+          <select
+            name="Birth Month"
+            id="birth-month"
+            value={form.birthMonth}
+            onChange={(e) =>
+              setForm((form) => ({
+                ...form,
+                birthMonth: e.target.value,
+              }))
+            }
+            required
+          >
+            <option disabled value="">
+              Month
+            </option>
+            {[
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ]
+              .sort()
+              .map((x) => (
+                <option key={x} value={x}>
+                  {x}
+                </option>
+              ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="age">Age: {form.age}</label>
+          <div className="grid grid-cols-12 gap-2">
+            {Array.from(Array(100)).map((_, i) => (
+              <div key={i} className="flex items-center gap-x-1">
+                <input
+                  id={`age-${i}`}
+                  type="radio"
+                  checked={form.age === i}
+                  value={i}
+                  name="age"
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      age: Number(e.target.value),
+                    })
+                  }
+                />
+                <label htmlFor={`age-${i}`}>{i}</label>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="flex flex-col gap-y-2">
@@ -221,7 +247,9 @@ export default function App() {
           )}
         </div>
       </div>
-      <button className="w-full">Submit</button>
+      <button className="w-full" onClick={() => alert("Submit it in your ass")}>
+        Submit
+      </button>
     </main>
   );
 }
