@@ -24,7 +24,7 @@ export default function App() {
   });
 
   return (
-    <main className="mx-auto max-w-lg px-4 py-8">
+    <main className="mx-auto max-w-lg space-y-8 px-4 py-8">
       <div className="space-y-4">
         <div className="">
           <h1 className="text-center text-2xl font-bold">
@@ -32,7 +32,7 @@ export default function App() {
           </h1>
           <p className="text-center">
             Created by:{" "}
-            <a href="https://github.com/bricesuazo" target="_blank">
+            <a href="https://link.bricesuazo.com" target="_blank">
               Brice Suazo
             </a>
           </p>
@@ -67,10 +67,103 @@ export default function App() {
           </div>
         </div>
 
+        <div className="">
+          <label htmlFor="birth-month">Birth month: {form.birthMonth}</label>
+
+          <select
+            name="Birth Month"
+            id="birth-month"
+            value={form.birthMonth}
+            onChange={(e) =>
+              setForm((form) => ({
+                ...form,
+                birthMonth: e.target.value,
+              }))
+            }
+            required
+          >
+            <option disabled value="">
+              Month
+            </option>
+            {[
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ]
+              .sort()
+              .map((x) => (
+                <option key={x} value={x}>
+                  {x}
+                </option>
+              ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col">
+          <div className="flex items-center gap-x-2">
+            <label htmlFor="mobile">Mobile Number: {form.mobile}</label>
+            {form.mobile && (
+              <button
+                className="rounded-full px-2 py-1 text-xs"
+                onClick={() =>
+                  setForm({
+                    ...form,
+                    mobile: null,
+                    generatedMobile: getRandomMobileNo(),
+                  })
+                }
+              >
+                Clear
+              </button>
+            )}
+          </div>
+          {form.generatedMobile && (
+            <div className="space-y-2">
+              <p>
+                {form.generatedMobile} {"<-- Is this your mobile number?"}
+              </p>
+              <div className="flex gap-x-2">
+                <button
+                  className="flex-grow"
+                  onClick={() =>
+                    setForm({
+                      ...form,
+                      mobile: form.generatedMobile,
+                      generatedMobile: "",
+                    })
+                  }
+                >
+                  Yes
+                </button>
+                <button
+                  className="flex-grow"
+                  onClick={() =>
+                    setForm({
+                      ...form,
+                      generatedMobile: getRandomMobileNo(),
+                    })
+                  }
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
         <div className="flex flex-col gap-y-2">
           <label htmlFor="email">Email: {form.email}</label>
 
-          <div className="flex flex-wrap gap-y-1">
+          <div className="grid grid-cols-3 gap-1 2xs:grid-cols-4 xs:grid-cols-6">
             {form.email
               .split("")
               .concat("")
@@ -127,99 +220,8 @@ export default function App() {
             </button>
           )}
         </div>
-        <div className="flex flex-col">
-          <div className="flex items-center gap-x-2">
-            <label htmlFor="mobile">Mobile Number: {form.mobile}</label>
-            {form.mobile && (
-              <button
-                className="rounded-full px-2 py-1 text-xs"
-                onClick={() =>
-                  setForm({
-                    ...form,
-                    mobile: null,
-                    generatedMobile: getRandomMobileNo(),
-                  })
-                }
-              >
-                Clear
-              </button>
-            )}
-          </div>
-          {form.generatedMobile && (
-            <div className="space-y-2">
-              <p>
-                {form.generatedMobile} {"<-- Is this your mobile number?"}
-              </p>
-              <div className="flex gap-x-2">
-                <button
-                  className="flex-grow"
-                  onClick={() =>
-                    setForm({
-                      ...form,
-                      mobile: form.generatedMobile,
-                      generatedMobile: "",
-                    })
-                  }
-                >
-                  Yes
-                </button>
-                <button
-                  className="flex-grow"
-                  onClick={() =>
-                    setForm({
-                      ...form,
-                      generatedMobile: getRandomMobileNo(),
-                    })
-                  }
-                >
-                  No
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="">
-          <label htmlFor="birth-month">Birth month: {form.birthMonth}</label>
-
-          <select
-            name="Birth Month"
-            id="birth-month"
-            value={form.birthMonth}
-            onChange={(e) =>
-              setForm((form) => ({
-                ...form,
-                birthMonth: e.target.value,
-              }))
-            }
-            required
-          >
-            <option disabled value="">
-              Month
-            </option>
-            {[
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December",
-            ]
-              .sort()
-              .map((x) => (
-                <option key={x} value={x}>
-                  {x}
-                </option>
-              ))}
-          </select>
-        </div>
       </div>
+      <button className="w-full">Submit</button>
     </main>
   );
 }
