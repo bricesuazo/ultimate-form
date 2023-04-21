@@ -142,7 +142,7 @@ export default function App() {
           </label>
           <input
             type="range"
-            name="nationality"
+            name="Nationality"
             id="nationality"
             value={form.nationality}
             onChange={(e) =>
@@ -153,6 +153,11 @@ export default function App() {
             }
             max={nationalityList.length}
           />
+        </div>
+
+        <div className="">
+          <label htmlFor="color">Skin complexion:</label>
+          <input type="color" name="Color" id="color" />
         </div>
 
         <div>
