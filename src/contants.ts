@@ -1,4 +1,4 @@
-export const nationalityList = [
+const nationalityList = [
   "afghan",
   "albanian",
   "algerian",
@@ -191,4 +191,12 @@ export const nationalityList = [
   "yemenite",
   "zambian",
   "zimbabwean",
+];
+
+export const nationalities = [
+  "",
+  ...nationalityList
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value.charAt(0).toUpperCase() + value.slice(1)),
 ];

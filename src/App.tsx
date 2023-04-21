@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { nationalityList } from "./contants";
+import { nationalities } from "./contants";
 
 export default function App() {
   const getRandomMobileNo = () => {
@@ -130,7 +130,7 @@ export default function App() {
             {
               [
                 "",
-                ...nationalityList
+                ...nationalities
                   .map((value) => ({ value, sort: Math.random() }))
                   .sort((a, b) => a.sort - b.sort)
                   .map(
@@ -151,7 +151,7 @@ export default function App() {
                 nationality: Number(e.target.value),
               }))
             }
-            max={nationalityList.length}
+            max={nationalities.length}
           />
         </div>
 
