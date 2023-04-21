@@ -126,19 +126,7 @@ export default function App() {
 
         <div className="">
           <label htmlFor="nationality">
-            Nationality:{" "}
-            {
-              [
-                "",
-                ...nationalities
-                  .map((value) => ({ value, sort: Math.random() }))
-                  .sort((a, b) => a.sort - b.sort)
-                  .map(
-                    ({ value }) =>
-                      value.charAt(0).toUpperCase() + value.slice(1)
-                  ),
-              ][form.nationality]
-            }
+            Nationality: {nationalities[form.nationality]}
           </label>
           <input
             type="range"
